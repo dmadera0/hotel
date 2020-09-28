@@ -1,5 +1,7 @@
 class AuthenticationController < ApplicationController
 
+    skip_before_action : auth_header, only: [:login]
+    
     def login
         @guest = Guest.find_by(username: params[:username])
     
