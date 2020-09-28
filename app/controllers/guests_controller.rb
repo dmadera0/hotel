@@ -7,15 +7,16 @@ class GuestsController < ApplicationController
     end
 
     def show
-        @guest = guest.find(params[:id])
+        @guest = Guest.find(params[:id])
 
-        render json: @guest include: [:room, :reservation]
+        render json: @guest, include: [:room, :reservation]
     end
 
     def create
         @guest = Guest.create(
-            name: params[:name],
-            party_size: params[:party_size]
+            username: params[:username],
+            party_size: params[:party_size],
+            password: params[:password]
 
         )
             render json: @guest
@@ -24,8 +25,9 @@ class GuestsController < ApplicationController
     def update
         @guest = Guest.find(params[:id])
         @guest.update(
-            name: params[:name]
-            party_size: params[:party_size]
+            name: params[:name],
+            party_size: params[:party_size],
+            password: params[:password]
         )
         render json: @guest
     end
